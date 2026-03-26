@@ -76,3 +76,76 @@
 .nav-logo-img:hover {
   transform: scale(1.05);
 }
+
+/* --- MOBILE MENU & DROPDOWN STYLES --- */
+.mobile-menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white; /* Default to white so it's visible on the hero image */
+  z-index: 1000;
+  transition: color 0.3s;
+}
+
+/* Turn the icon dark when scrolled OR when the menu is open */
+.navbar.scrolled .mobile-menu-icon,
+.navbar.mobile-open .mobile-menu-icon {
+  color: var(--text-dark);
+}
+
+/* Force the navbar background to be solid when the menu is open */
+.navbar.mobile-open {
+  background-color: #9AB17A;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* --- MEDIA QUERY FOR TABLET & MOBILE --- */
+@media screen and (max-width: 768px) {
+  .mobile-menu-icon {
+    display: block; 
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%;
+    height: auto; /* Hug the links instead of taking the whole screen */
+    background-color: #9AB17A; 
+    flex-direction: column;
+    padding: 10px 0 20px 0;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    
+    /* Elegant vertical dropdown animation */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+  }
+
+  .navbar-links.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .navbar-links li {
+    margin: 15px 0;
+    width: 100%;
+    text-align: center; /* Center the links nicely */
+  }
+
+  .navbar-links li a {
+    display: block;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    font-weight: 600;
+    padding: 10px;
+  }
+
+  /* Optional: A little hover effect for mobile taps */
+  .navbar-links li a:hover {
+    color: var(--primary-color);
+    background-color: #9AB17A;
+  }
+}

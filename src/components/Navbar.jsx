@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import { Link, useLocation } from 'react-router-dom';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import logoImage from '../assets/logorcc.png';
+import './Navbar.css';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
-      // If window is scrolled down more than 50px, set to true
       if (window.scrollY > 50) {
         setIsScrolled(true);
       } else {
@@ -16,25 +23,27 @@ const Navbar = () => {
       }
     };
 
-    // Add the event listener
     window.addEventListener('scroll', handleScroll);
-
-    // Cleanup function to remove the listener when component unmounts
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    // Dynamically add the 'scrolled' class based on state
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
       <div className="navbar-logo">
         <Link to="/">
-          {/* 2. Replace the <h1> with the <img> tag */}
           <img src={logoImage} alt="Rasoi Cooking Classes Logo" className="nav-logo-img" />
         </Link>
       </div>
-      <ul className="navbar-links">
+
+      <div className="mobile-menu-icon" onClick={toggleMobileMenu}>
+        {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+      </div>
+
+      <ul className={`navbar-links ${isMobileMenuOpen ? 'active' : ''}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/courses">Courses</Link></li>
         <li><Link to="/contact">Contact</Link></li>
