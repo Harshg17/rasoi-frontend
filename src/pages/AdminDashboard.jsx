@@ -23,7 +23,7 @@ const AdminDashboard = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/api/courses');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/courses`);
       const data = await response.json();
       setCourses(data);
     } catch (error) {
@@ -65,7 +65,7 @@ const AdminDashboard = () => {
     if (!window.confirm("Are you sure you want to permanently delete this course?")) return;
     
     try {
-      const response = await fetch(`http://localhost:5000/api/courses/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/courses/${id}`, { method: 'DELETE' });
       if (response.ok) {
         alert('Course deleted.');
         fetchCourses(); // Refresh list
