@@ -1,0 +1,31 @@
+:root {
+  --primary-color: #ff7b00; /* Saffron Orange */
+  --secondary-color: #d90429; /* Chili Red */
+  --accent-green: #2a9d8f; /* Coriander Green */
+  --bg-light: #C3CC9B; /* Warm Dough White */
+  --text-dark: #2b2d42;
+  --text-light: #ffffff;
+  --gradient-hot: linear-gradient(135deg, #ff7b00, #d90429);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncier transition */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}

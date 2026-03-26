@@ -1,0 +1,243 @@
+.courses-page {
+  padding: 8rem 5% 5rem; /* Extra top padding to clear fixed navbar */
+  min-height: 80vh;
+  background-color: var(--bg-light);
+}
+
+.courses-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* --- TABS --- */
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  background: white;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+}
+
+.tab-btn:hover, .tab-btn.active {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 123, 0, 0.3);
+}
+
+/* --- COURSE GRID --- */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: var(--transition);
+  border-left: 5px solid transparent;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  border-left-color: var(--secondary-color);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.course-card h3 {
+  color: var(--text-dark);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.click-to-view {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* --- MODAL OVERLAY --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Must be higher than navbar */
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px; right: 20px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: var(--secondary-color);
+}
+
+.modal-content h2 {
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+}
+
+/* --- TOGGLE SWITCH --- */
+.tier-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 2rem;
+  background: var(--bg-light);
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.tier-toggle span {
+  font-weight: bold;
+  color: #888;
+  transition: color 0.3s;
+}
+
+.tier-toggle span.active-tier {
+  color: var(--primary-color);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 4px; bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* --- COURSE INFO DETAILS --- */
+.course-info ul {
+  margin: 1rem 0;
+}
+
+.course-info ul li {
+  margin-bottom: 0.8rem;
+  color: var(--text-dark);
+}
+
+.price-tag {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-green);
+  margin: 1.5rem 0;
+  text-align: center;
+  padding: 10px;
+  background: rgba(42, 157, 143, 0.1);
+  border-radius: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* --- FORM STYLES --- */
+.enquiry-form {
+  margin-top: 1.5rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.input-group input, .input-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus, .input-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(255, 123, 0, 0.2);
+}

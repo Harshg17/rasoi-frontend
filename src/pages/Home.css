@@ -1,0 +1,290 @@
+/* --- KEYFRAMES & ANIMATIONS --- */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+/* Scroll Reveal Classes */
+.reveal-wrapper {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-wrapper.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  position: relative;
+  height: 85vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  /* The "Ken Burns" Slow Zoom Effect */
+  transform: scale(1.15); 
+  transition: opacity 1.5s ease-in-out, transform 7s linear;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--text-light);
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.animate-slide-down {
+  font-size: 4.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+  animation: slideDown 1s ease-out forwards;
+}
+
+.animate-fade-in {
+  font-size: 1.6rem;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 1.5s ease-in forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+
+.cta-button {
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: var(--gradient-hot);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(255, 123, 0, 0.4);
+  animation: fadeIn 1.5s ease-in forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(217, 4, 41, 0.6);
+}
+
+/* --- REUSABLE COMPONENTS --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-size: 2.8rem;
+  color: var(--text-dark);
+}
+
+.divider {
+  height: 4px;
+  width: 80px;
+  background: var(--gradient-hot);
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+.animated-divider {
+  animation: expandWidth 1s ease-out forwards;
+}
+
+/* --- ABOUT CLASSES SECTION --- */
+.about-classes {
+  padding: 6rem 5%;
+  background-color: var(--bg-light);
+}
+
+.classes-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.class-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 350px;
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  border-bottom: 5px solid var(--primary-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.class-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--gradient-hot);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.class-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(255, 123, 0, 0.2);
+  border-bottom-color: var(--secondary-color);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.class-card:hover .card-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.class-card h3 {
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.class-card p {
+  color: #666;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- ABOUT INSTRUCTOR SECTION --- */
+.about-instructor {
+  padding: 7rem 5%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+  flex-wrap: wrap;
+}
+
+.instructor-content {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.instructor-content h2 {
+  font-size: 2.8rem;
+}
+
+.instructor-content .divider {
+  margin: 15px 0 25px 0;
+}
+
+.instructor-content p {
+  line-height: 1.8;
+  font-size: 1.15rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.outline-button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.outline-button:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.instructor-image {
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  position: relative;
+}
+
+.image-backdrop {
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  width: 100%;
+  height: 100%;
+  background: var(--accent-green);
+  border-radius: 20px;
+  z-index: 0;
+  transition: var(--transition);
+}
+
+.instructor-image:hover .image-backdrop {
+  top: 10px;
+  left: -10px;
+  background: var(--gradient-hot);
+}
+
+.instructor-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.instructor-image:hover img {
+  transform: translateY(-10px);
+}

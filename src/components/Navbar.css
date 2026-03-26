@@ -1,0 +1,78 @@
+/* --- DEFAULT STATE (Transparent & At the Top) --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  position: fixed; /* Fixed position makes it float over the content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent; 
+  /* Smoothly transition background, padding (shrink effect), and shadows */
+  transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* White text to stand out against the dark hero images */
+.navbar-logo h1,
+.navbar-links a {
+  color: var(--text-light); 
+  transition: color 0.3s ease;
+}
+
+.navbar-logo h1 {
+  font-size: 1.8rem;
+}
+
+.navbar-logo span {
+  color: var(--primary-color);
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-links a {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.navbar-links a:hover {
+  color: var(--primary-color);
+}
+
+
+/* --- SCROLLED STATE (Solid Background) --- */
+.navbar.scrolled {
+  background-color: #9AB17A; /* Turns white */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  padding: 1rem 5%; /* Shrinks slightly for a sleeker feel */
+}
+
+/* Change text colors back to dark/red when background is white */
+.navbar.scrolled .navbar-logo h1 {
+  color: var(--secondary-color); 
+}
+
+.navbar.scrolled .navbar-links a {
+  color: var(--text-dark);
+}
+
+/* Ensure hover state still works on solid background */
+.navbar.scrolled .navbar-links a:hover {
+  color: var(--primary-color);
+}
+
+.nav-logo-img {
+  height: 70px; /* Adjust this number to make your logo bigger or smaller */
+  width: auto;  /* Keeps the aspect ratio correct */
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Optional: Add a tiny hover effect so it feels interactive */
+.nav-logo-img:hover {
+  transform: scale(1.05);
+}
