@@ -5,9 +5,9 @@ const AdminDashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   
-  // New State for managing the list and editing
+  // State for managing the list and editing
   const [courses, setCourses] = useState([]);
-  const [editingId, setEditingId] = useState(null); // Tracks if we are editing vs creating
+  const [editingId, setEditingId] = useState(null);
 
   const defaultFormState = {
     title: '', category: 'Baking', image: '', description: '',
@@ -42,10 +42,8 @@ const AdminDashboard = () => {
     setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
   };
 
-  // --- NEW: Handle Edit Button Click ---
   const handleEditClick = (course) => {
     setEditingId(course.id);
-    // Populate form, converting arrays back to comma-separated strings
     setFormData({
       title: course.title,
       category: course.category,
@@ -57,10 +55,9 @@ const AdminDashboard = () => {
       advancedPrice: course.advanced?.price || '',
       advancedItems: course.advanced?.items?.join(', ') || ''
     });
-    window.scrollTo(0, 0); // Scroll back to top to see the form
+    window.scrollTo(0, 0); 
   };
 
-  // --- NEW: Handle Delete Button Click ---
   const handleDeleteClick = async (id) => {
     if (!window.confirm("Are you sure you want to permanently delete this course?")) return;
     
@@ -68,8 +65,8 @@ const AdminDashboard = () => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/courses/${id}`, { method: 'DELETE' });
       if (response.ok) {
         alert('Course deleted.');
-        fetchCourses(); // Refresh list
-        if (editingId === id) cancelEdit(); // Clear form if we were editing the deleted course
+        fetchCourses(); 
+        if (editingId === id) cancelEdit(); 
       } else alert('Failed to delete.');
     } catch (error) {
       alert('Server error.');
@@ -101,13 +98,12 @@ const AdminDashboard = () => {
       } : undefined
     };
 
-    // If editingId exists, send PUT request. Otherwise, send POST request.
+    // --- FIXED: Updated the URL logic to use the environment variable ---
     const url = editingId 
-      ? `http://localhost:5000/api/courses/${editingId}` 
-      : 'http://localhost:5000/api/courses';
+      ? `${import.meta.env.VITE_API_URL}/api/courses/${editingId}` 
+      : `${import.meta.env.VITE_API_URL}/api/courses`;
     const method = editingId ? 'PUT' : 'POST';
 
-    // If creating new, generate the ID slug
     if (!editingId) {
        payload.id = formData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
     }
@@ -122,7 +118,7 @@ const AdminDashboard = () => {
       if (response.ok) {
         alert(`Course successfully ${editingId ? 'updated' : 'added'}!`);
         cancelEdit();
-        fetchCourses(); // Refresh the list
+        fetchCourses(); 
       } else alert('Failed to save course.');
     } catch (error) {
       alert('Cannot connect to server.');
@@ -132,7 +128,7 @@ const AdminDashboard = () => {
   };
 
   if (!isAuthenticated) {
-    return ( /* ... Your existing Login JSX ... */ 
+    return (  
       <div className="admin-page login-mode">
         <div className="login-card">
           <h2>Admin Access</h2>
@@ -153,7 +149,6 @@ const AdminDashboard = () => {
       </div>
 
       <div className="admin-content-wrapper">
-        {/* FORM SECTION */}
         <div className="admin-form-container">
           <h3>{editingId ? 'Edit Course' : 'Add New Course'}</h3>
           {editingId && <button className="cancel-edit-btn" onClick={cancelEdit}>Cancel Edit</button>}
@@ -223,7 +218,6 @@ const AdminDashboard = () => {
           </form>
         </div>
 
-        {/* LIST SECTION */}
         <div className="admin-list-container">
           <h3>Current Courses</h3>
           <div className="course-list">
