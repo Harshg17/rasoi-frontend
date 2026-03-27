@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Courses.css';
 import RevealOnScroll from '../components/RevealOnScroll';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import loadingAnimation from '../assets/loading.lottie';
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -37,8 +39,14 @@ const Courses = () => {
   // Show a loading screen while waiting for the database
   if (isLoading) {
     return (
-      <div className="courses-page" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
-        <h2>Loading freshly baked courses...</h2>
+      <div className="course-detail-page" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+        <DotLottieReact
+          src={loadingAnimation} 
+          loop
+          autoplay
+          style={{ width: 250, height: 250 }}
+        />
+        <h3 style={{ marginTop: '20px', color: 'var(--text-dark)' }}>Preparing the kitchen...</h3>
       </div>
     );
   }
