@@ -84,7 +84,23 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   border-top: 4px solid var(--accent-green);
 }
+/* --- CURRICULUM SUBHEADINGS --- */
+.curriculum-subheading {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--primary-color) !important;
+  margin-top: 20px !important;
+  margin-bottom: 5px !important;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+  list-style-type: none; /* Removes any bullet points */
+}
 
+/* Optional: Make the advanced subheadings match the advanced color scheme */
+.advanced-subheading {
+  color: #d97706 !important; /* A nice warm gold/orange color */
+  border-bottom-color: #fde68a;
+}
 .curriculum-list {
   margin-top: 1.5rem;
   list-style-type: none;

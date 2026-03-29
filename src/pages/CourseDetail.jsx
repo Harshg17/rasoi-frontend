@@ -119,30 +119,43 @@ const CourseDetail = () => {
               <h3>What You Will Learn:</h3>
               
               {!isAdvanced ? (
-                // --- BASIC VIEW (Single Column) ---
+                // --- BASIC VIEW ---
                 <ul className="curriculum-list">
-                  {course.basic.items.map((item, index) => (
-                    <li key={index}><span className="check-icon">✔️</span> {item}</li>
-                  ))}
+                  {course.basic.items.map((item, index) => {
+                    const text = item.trim();
+                    // THE MAGIC TRICK: Check if it's a subheading
+                    if (text.startsWith('##')) {
+                      return <li key={index} className="curriculum-subheading">{text.replace('##', '').trim()}</li>;
+                    }
+                    return <li key={index}><span className="check-icon">✔️</span> {text}</li>;
+                  })}
                 </ul>
               ) : (
-                // --- ADVANCED VIEW (Side-by-Side) ---
+                // --- ADVANCED VIEW ---
                 <div className="curriculum-side-by-side">
                   <div className="curriculum-column">
                     <h4>Basic Curriculum</h4>
                     <ul className="curriculum-list">
-                      {course.basic.items.map((item, index) => (
-                        <li key={index}><span className="check-icon">✔️</span> {item}</li>
-                      ))}
+                      {course.basic.items.map((item, index) => {
+                        const text = item.trim();
+                        if (text.startsWith('##')) {
+                          return <li key={index} className="curriculum-subheading">{text.replace('##', '').trim()}</li>;
+                        }
+                        return <li key={index}><span className="check-icon">✔️</span> {text}</li>;
+                      })}
                     </ul>
                   </div>
                   
                   <div className="curriculum-column advanced-column">
                     <h4>Advanced Additions</h4>
                     <ul className="curriculum-list">
-                      {course.advanced.items.map((item, index) => (
-                        <li key={index}><span className="check-icon">✨</span> {item}</li>
-                      ))}
+                      {course.advanced.items.map((item, index) => {
+                        const text = item.trim();
+                        if (text.startsWith('##')) {
+                          return <li key={index} className="curriculum-subheading advanced-subheading">{text.replace('##', '').trim()}</li>;
+                        }
+                        return <li key={index}><span className="check-icon">✨</span> {text}</li>;
+                      })}
                     </ul>
                   </div>
                 </div>
