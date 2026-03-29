@@ -85,7 +85,7 @@ const Courses = () => {
               <h3>{course.title}</h3>
               <p className="course-price" style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>
                 {course.basic?.price 
-                  ? `₹${course.basic.price.toLocaleString('en-IN')}` 
+                  ? `${course.basic.price.toLocaleString('en-IN')}` 
                   : 'Price upon enquiry'}
               </p>
               <p className="click-to-view">View Full Details &rarr;</p>
