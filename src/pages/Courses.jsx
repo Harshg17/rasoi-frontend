@@ -6,8 +6,11 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import loadingAnimation from '../assets/loading.lottie';
 
 const Courses = () => {
+  // 1. THE STICKY NOTE: Check sessionStorage first, default to 'Baking' if empty
   const [courses, setCourses] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('Baking');
+  const [activeCategory, setActiveCategory] = useState(
+    sessionStorage.getItem('savedCategory') || 'Baking'
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   // Fetch courses from your Node/Express backend
@@ -19,11 +22,14 @@ const Courses = () => {
         const data = await response.json();
         setCourses(data);
         
-        // Optionally, set the initial active category to the first one available
+        // Safety Check: Make sure the currently active category actually exists in the database
         if (data.length > 0) {
           const uniqueCategories = [...new Set(data.map(c => c.category))];
-          if (!uniqueCategories.includes('Baking')) {
+          
+          // If the saved category isn't in the database, fallback to the first one available
+          if (!uniqueCategories.includes(activeCategory)) {
              setActiveCategory(uniqueCategories[0]);
+             sessionStorage.setItem('savedCategory', uniqueCategories[0]);
           }
         }
       } catch (error) {
@@ -35,6 +41,12 @@ const Courses = () => {
     
     fetchCourses();
   }, []);
+
+  // 2. THE HANDLER: Update the UI and save to sessionStorage simultaneously
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+    sessionStorage.setItem('savedCategory', category);
+  };
 
   // Show a loading screen while waiting for the database
   if (isLoading) {
@@ -70,7 +82,8 @@ const Courses = () => {
           <button 
             key={category} 
             className={`tab-btn ${activeCategory === category ? 'active' : ''}`}
-            onClick={() => setActiveCategory(category)}
+            // 3. THE TRIGGER: Call our new handler instead of setActiveCategory directly
+            onClick={() => handleCategoryChange(category)}
           >
             {category}
           </button>
@@ -85,7 +98,7 @@ const Courses = () => {
               <h3>{course.title}</h3>
               <p className="course-price" style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>
                 {course.basic?.price 
-                  ? `${course.basic.price.toLocaleString('en-IN')}` 
+                  ? `₹${course.basic.price.toLocaleString('en-IN')}` 
                   : 'Price upon enquiry'}
               </p>
               <p className="click-to-view">View Full Details &rarr;</p>
